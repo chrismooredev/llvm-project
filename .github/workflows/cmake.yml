@@ -191,16 +191,13 @@ jobs:
       - name: Build Clang
         run: cmake --build build --config ${{matrix.build-type}}
 
-      - name: Inspect Clang Artifacts
-        run: ls
-
       - name: Install Clang
         run: cmake --build build --config ${{matrix.build-type}} --target install
       - name: Upload Clang
         uses: actions/upload-artifact@v4
         with:
           name: Clang${{matrix.runs-on}}${{matrix.build-type}}
-          path: ./*clang*
+          path: clang
 
       - name: Install ez80-clang
         run: cmake -E copy clang/bin/clang${{env.EXE}} ez80-clang${{env.EXE}}
